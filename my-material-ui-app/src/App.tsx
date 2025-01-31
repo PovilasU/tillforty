@@ -1,5 +1,5 @@
 import React from "react";
-import Dashboard from "./components/Dashboard"; // ✅ Importing .jsx into .tsx
+import Dashboard from "./dashboard/Dashboard.tsx"; // ✅ Import Dashboard component
 
 const App: React.FC = () => {
   return <Dashboard />;

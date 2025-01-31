@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   esbuild: {
     loader: "tsx",
-    include: [/src\/.*\.[tj]sx?$/],
+    include: [/src\/.*\.[tj]sx?$/], // ✅ Ensure Vite treats `.tsx` and `.jsx` files correctly
   },
 });

@@ -1,11 +1,14 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
   "compilerOptions": {
-    "allowJs": true,
-    "jsx": "react-jsx"
-  }
+    "allowImportingTsExtensions": true,  // ✅ Allows importing .tsx files explicitly
+    "noEmit": true,                      // ✅ Ensures no files are emitted
+    "moduleResolution": "node",          // ✅ Ensures correct module resolution
+    "esModuleInterop": true   ,           // ✅ Helps with default imports
+    
+    "allowJs": true,       // ✅ Allow JavaScript files in a TypeScript project
+    "jsx": "react-jsx"     // ✅ Enables JSX support (MUST NOT be "preserve")
+  },
+  "include": ["src"],      // ✅ Ensures that the `src/` folder is included
+  "exclude": ["node_modules"],
+
 }
