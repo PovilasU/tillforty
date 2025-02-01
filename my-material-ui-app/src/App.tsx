@@ -1,25 +1,17 @@
-import React from "react";
-import Dashboard from "./dashboard/Dashboard.tsx"; // ✅ Import Dashboard component
-import SingIn from "./sign-in/SignIn.tsx"; // ✅ Import SignIn component
-import SingUp from "./sign-up/SignUp.tsx"; // ✅ Import SignIn component
+import * as React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SignUp from "./sign-up/SignUp.tsx";
+import Dashboard from "./dashboard/Dashboard.tsx";
 
 const App: React.FC = () => {
-  return <SingUp />;
-  //return <SingIn />;
-  //return <Dashboard />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignUp />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
+  );
 };
 
 export default App;
-
-// import * as React from "react";
-// import TestFirebaseAuth from "./sign-up/TestFirebaseAuth.tsx";
-
-// const App: React.FC = () => {
-//   return (
-//     <div>
-//       <TestFirebaseAuth />
-//     </div>
-//   );
-// };
-
-// export default App;

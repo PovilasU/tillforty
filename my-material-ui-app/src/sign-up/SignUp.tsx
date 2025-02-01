@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -27,6 +28,7 @@ import {
   signInWithRedirect,
 } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import Dashboard from "./dashboard/Dashboard"; // ✅ Import Dashboard component
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -83,6 +85,8 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
+  const navigate = useNavigate(); // ✅ Use navigate hook
+
   const validateInputs = () => {
     let isValid = true;
 
@@ -128,6 +132,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
       );
       const user = userCredential.user;
       console.log("User Info:", user);
+      navigate("/dashboard"); // ✅ Redirect to dashboard
     } catch (error: any) {
       setSignInError("An error occurred during sign-up. Please try again.");
       console.error("Error during sign-up:", error);
@@ -139,6 +144,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
       setSignInError(""); // Clear previous errors
       const result = await signInWithPopup(auth, provider);
       console.log("User Info:", result.user);
+      navigate("/dashboard"); // ✅ Redirect to dashboard
     } catch (error: any) {
       if (error.code === "auth/popup-closed-by-user") {
         setSignInError(
