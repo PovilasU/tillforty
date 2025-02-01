@@ -4,7 +4,7 @@
     "noEmit": true,                      // ✅ Ensures no files are emitted
     "moduleResolution": "node",          // ✅ Ensures correct module resolution
     "esModuleInterop": true   ,           // ✅ Helps with default imports
-    
+     "module": "es2020",
     "allowJs": true,       // ✅ Allow JavaScript files in a TypeScript project
     "jsx": "react-jsx"     // ✅ Enables JSX support (MUST NOT be "preserve")
   },
