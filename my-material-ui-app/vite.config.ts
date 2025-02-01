@@ -8,4 +8,10 @@ export default defineConfig({
     loader: "tsx",
     include: [/src\/.*\.[tj]sx?$/], // ✅ Ensure Vite treats `.tsx` and `.jsx` files correctly
   },
+  server: {
+    headers: {
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "require-corp",
+    },
+  },
 });
