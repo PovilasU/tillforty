@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "skipLibCheck": true,
-    "noEmitOnError": false,
     "allowImportingTsExtensions": true,  // ✅ Allows importing .tsx files explicitly
     "noEmit": true,                      // ✅ Ensures no files are emitted
-    "moduleResolution": "node",          // ✅ Ensures correct module resolution
+   // "moduleResolution": "node",          // ✅ Ensures correct module resolution
+    "moduleResolution": "node16",          // ✅ Ensures correct module resolution
     "esModuleInterop": true   ,           // ✅ Helps with default imports
      "module": "es2020",
     "allowJs": true,       // ✅ Allow JavaScript files in a TypeScript project

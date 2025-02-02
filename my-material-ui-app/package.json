@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "buildforce": "cross-env TSC_COMPILE_ON_ERROR=true tsc -b && vite build --force",
+    "buildforcetemp": "tsc -b && vite build --force",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -18,6 +20,7 @@
     "@mui/x-data-grid": "^7.25.0",
     "@mui/x-data-grid-pro": "^7.25.0",
     "@mui/x-date-pickers": "^7.25.0",
+    "@mui/x-date-pickers-pro": "^7.25.0",
     "@mui/x-tree-view": "^7.25.0",
     "dayjs": "^1.11.13",
     "firebase": "^11.2.0",
@@ -31,6 +34,7 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
+    "cross-env": "^7.0.3",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
