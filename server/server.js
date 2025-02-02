@@ -8,7 +8,17 @@ const app = express();
 const port = 5003;
 
 // Middleware
-app.use(cors());
+// app.use(cors({
+//   origin: ['http://localhost:5173', 'http://localhost:4173'], // Add both dev and preview URLs
+//   methods: 'GET,POST,PUT,DELETE',
+//   allowedHeaders: 'Content-Type,Authorization'
+// }));
+
+app.use(cors({
+  origin: true, // Allow all origins
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type,Authorization'
+}));
 app.use(bodyParser.json());
 
 // Routes
