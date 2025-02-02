@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -27,6 +28,7 @@ import {
   signInWithPopup,
   signInWithRedirect,
 } from "../firebaseConfig";
+import axios from "../services/api"; // ✅ Import axios instance
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Dashboard from "../dashboard/Dashboard"; // ✅ Import Dashboard component
 
@@ -125,22 +127,21 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
     if (!validateInputs()) return;
 
     try {
-      // const response = await fetch("http://localhost:5000/api/register", {
-      const response = await fetch("http://localhost:5003/api/auth/register", {
-        // Ensure the correct API endpoint
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        "/register",
+        {
+          name,
+          email,
+          password,
         },
-        body: JSON.stringify({ name, email, password }),
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      if (!response.ok) {
-        throw new Error("Failed to register");
-      }
-
-      const user = await response.json();
-      console.log("User Info:", user);
+      console.log("User Info:", response.data);
       navigate("/dashboard"); // ✅ Redirect to dashboard
     } catch (error: any) {
       setSignInError("An error occurred during sign-up. Please try again.");
@@ -173,6 +174,23 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
     }
   };
 
+  //test delete after testing
+
+  // Fetch users and log to console
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get("/users");
+      console.log("Users:", response.data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  //test ends
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />

@@ -24,6 +24,7 @@ import {
 } from "./components/CustomIcons";
 import { auth, provider } from "../firebaseConfig";
 import { signInWithPopup, signInWithRedirect } from "firebase/auth";
+import axios from "../services/api"; // ✅ Import axios instance
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -112,7 +113,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     return isValid;
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitOld = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validateInputs()) return;
 
@@ -142,6 +143,38 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     } catch (error: any) {
       setSignInError(
         error.message || "An error occurred during sign-in. Please try again."
+      );
+      console.error("Error during sign-in:", error);
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!validateInputs()) return;
+
+    try {
+      const response = await axios.post(
+        "/login",
+        {
+          email: (document.getElementById("email") as HTMLInputElement).value,
+          password: (document.getElementById("password") as HTMLInputElement)
+            .value,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("User Info:", response.data);
+      // Store user information in local storage
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      navigate("/dashboard"); // ✅ Redirect to dashboard
+    } catch (error: any) {
+      setSignInError(
+        error.response?.data?.error ||
+          "An error occurred during sign-in. Please try again."
       );
       console.error("Error during sign-in:", error);
     }
