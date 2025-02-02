@@ -23,6 +23,11 @@ app.use(express.static(path.join(__dirname, '../my-material-ui-app/dist')));
 // Routes
 app.use('/api/auth', authRoutes(pool));
 
+// Serve the index.html file for all non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../my-material-ui-app/dist', 'index.html'));
+});
+
 // Function to get the local network IP address
 const getLocalNetworkIP = () => {
   const interfaces = os.networkInterfaces();
