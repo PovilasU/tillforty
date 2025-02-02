@@ -1,13 +1,11 @@
 {
-  "name": "my-material-ui-app",
+  "name": "material-dashboard",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "buildforce": "cross-env TSC_COMPILE_ON_ERROR=true tsc -b && vite build --force",
-    "buildforcetemp": "tsc -b && vite build --force",
     "lint": "eslint .",
     "preview": "vite preview"
   },

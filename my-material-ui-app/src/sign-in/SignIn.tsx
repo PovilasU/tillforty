@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -205,6 +206,20 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       console.error("Error during sign-in:", error);
     }
   };
+
+  // Fetch users and log to console
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get("users");
+      console.log("Foo1 Users:", response.data);
+    } catch (error) {
+      console.error("foo1 Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
     <AppTheme {...props}>

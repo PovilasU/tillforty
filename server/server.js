@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const pool = require('./db/dbConfig');
 const authRoutes = require('./routes/authRoutes');
 
@@ -8,18 +9,15 @@ const app = express();
 const port = 5003;
 
 // Middleware
-// app.use(cors({
-//   origin: ['http://localhost:5173', 'http://localhost:4173'], // Add both dev and preview URLs
-//   methods: 'GET,POST,PUT,DELETE',
-//   allowedHeaders: 'Content-Type,Authorization'
-// }));
-
 app.use(cors({
   origin: true, // Allow all origins
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization'
 }));
 app.use(bodyParser.json());
+
+// Serve static files from the /dist directory
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Routes
 app.use('/api/auth', authRoutes(pool));

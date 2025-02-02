@@ -177,12 +177,13 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
   //test delete after testing
 
   // Fetch users and log to console
+  // Fetch users and log to console
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("/users");
-      console.log("Users:", response.data);
+      const response = await axios.get("users");
+      console.log("Foo1 Users:", response.data);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("foo1 Error fetching users:", error);
     }
   };
 
