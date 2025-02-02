@@ -28,7 +28,7 @@ import {
   signInWithRedirect,
 } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import Dashboard from "./dashboard/Dashboard"; // ✅ Import Dashboard component
+import Dashboard from "../dashboard/Dashboard"; // ✅ Import Dashboard component
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -126,7 +126,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
 
     try {
       // const response = await fetch("http://localhost:5000/api/register", {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch("http://localhost:5003/api/auth/register", {
         // Ensure the correct API endpoint
         method: "POST",
         headers: {

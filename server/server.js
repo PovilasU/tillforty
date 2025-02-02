@@ -5,7 +5,7 @@ const pool = require('./db/dbConfig');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-const port = 5000;
+const port = 5003;
 
 // Middleware
 app.use(cors());
