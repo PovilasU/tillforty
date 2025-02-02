@@ -179,7 +179,7 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
       <ColorModeSelect sx={{ position: "fixed", top: "1rem", right: "1rem" }} />
       <SignUpContainer direction="column" justifyContent="space-between">
         <Card variant="outlined">
-          <SitemarkIcon />
+          {/* <SitemarkIcon /> */}
           <Typography component="h1" variant="h4">
             Sign up
           </Typography>
@@ -269,16 +269,12 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
             </Typography>
           )}
 
-          <Button fullWidth variant="outlined" startIcon={<FacebookIcon />}>
+          {/* <Button fullWidth variant="outlined" startIcon={<FacebookIcon />}>
             Sign up with Facebook
-          </Button>
+          </Button> */}
           <Typography sx={{ textAlign: "center" }}>
             Already have an account?{" "}
-            <Link
-              href="/material-ui/getting-started/templates/sign-in/"
-              variant="body2"
-              sx={{ alignSelf: "center" }}
-            >
+            <Link href="/signin" variant="body2" sx={{ alignSelf: "center" }}>
               Sign in
             </Link>
           </Typography>

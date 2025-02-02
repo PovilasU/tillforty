@@ -1,4 +1,6 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = (pool) => {
   const router = express.Router();
@@ -8,9 +10,12 @@ module.exports = (pool) => {
     const { name, email, password } = req.body;
 
     try {
+      // Hash the password before storing it
+      const hashedPassword = await bcrypt.hash(password, 10);
+
       const result = await pool.query(
         'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *',
-        [name, email, password] // Storing plain text password (not recommended)
+        [name, email, hashedPassword]
       );
       res.status(201).json(result.rows[0]);
     } catch (error) {
@@ -32,12 +37,19 @@ module.exports = (pool) => {
 
       const user = result.rows[0];
 
-      // Compare the provided password with the stored password
-      if (password !== user.password) {
+      // Compare the provided password with the stored hashed password
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (!isMatch) {
         return res.status(401).json({ error: 'Invalid email or password' });
       }
 
-      res.status(200).json({ user: { id: user.id, name: user.name, email: user.email } });
+      // Generate a JWT token
+      const token = jwt.sign({ id: user.id, email: user.email }, 'your_jwt_secret', {
+        expiresIn: '1h',
+      });
+
+      res.status(200).json({ token, user: { id: user.id, name: user.name, email: user.email } });
     } catch (error) {
       console.error('Error logging in user:', error);
       res.status(500).json({ error: 'Internal server error' });
