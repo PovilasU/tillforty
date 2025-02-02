@@ -136,6 +136,8 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
       const data = await response.json();
       console.log("User Info:", data);
+      // Store user information in local storage
+      localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/dashboard"); // ✅ Redirect to dashboard
     } catch (error: any) {
       setSignInError(
