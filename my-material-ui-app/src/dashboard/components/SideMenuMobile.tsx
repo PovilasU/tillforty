@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
@@ -21,6 +22,15 @@ export default function SideMenuMobile({
   toggleDrawer,
 }: SideMenuMobileProps) {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear user information from local storage
+    localStorage.removeItem("user");
+    // Redirect to the login page
+    navigate("/signin");
+  };
+
   return (
     <Drawer
       anchor="right"
@@ -29,31 +39,31 @@ export default function SideMenuMobile({
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
         [`& .${drawerClasses.paper}`]: {
-          backgroundImage: 'none',
-          backgroundColor: 'background.paper',
+          backgroundImage: "none",
+          backgroundColor: "background.paper",
         },
       }}
     >
       <Stack
         sx={{
-          maxWidth: '70dvw',
-          height: '100%',
+          maxWidth: "70dvw",
+          height: "100%",
         }}
       >
         <Stack direction="row" sx={{ p: 2, pb: 0, gap: 1 }}>
           <Stack
             direction="row"
-            sx={{ gap: 1, alignItems: 'center', flexGrow: 1, p: 1 }}
+            sx={{ gap: 1, alignItems: "center", flexGrow: 1, p: 1 }}
           >
-            <Avatar
+            {/* <Avatar
               sizes="small"
               alt="Riley Carter"
               src="/static/images/avatar/7.jpg"
               sx={{ width: 24, height: 24 }}
-            />
+            /> */}
             <Typography component="p" variant="h6">
               {/* Foo Riley Carter */}
-              {user.name}
+              {user.name || user.displayName}
             </Typography>
           </Stack>
           <MenuButton showBadge>
@@ -67,7 +77,12 @@ export default function SideMenuMobile({
         </Stack>
         <CardAlert />
         <Stack sx={{ p: 2 }}>
-          <Button variant="outlined" fullWidth startIcon={<LogoutRoundedIcon />}>
+          <Button
+            variant="outlined"
+            fullWidth
+            startIcon={<LogoutRoundedIcon />}
+            onClick={handleLogout} // Add logout functionality
+          >
             Logout
           </Button>
         </Stack>

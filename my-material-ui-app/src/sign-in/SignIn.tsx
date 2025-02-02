@@ -147,41 +147,12 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     }
   };
 
-  const handleSubmitOld = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!validateInputs()) return;
-
-    try {
-      const response = await fetch("http://localhost:5003/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: (document.getElementById("email") as HTMLInputElement).value,
-          password: (document.getElementById("password") as HTMLInputElement)
-            .value,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to sign in");
-      }
-
-      const data = await response.json();
-      console.log("User Info:", data);
-      navigate("/dashboard"); // ✅ Redirect to dashboard
-    } catch (error: any) {
-      setSignInError("An error occurred during sign-in. Please try again.");
-      console.error("Error during sign-in:", error);
-    }
-  };
-
   const handleGoogleSignIn = async () => {
     try {
       setSignInError(""); // Clear previous errors
       const result = await signInWithPopup(auth, provider);
       console.log("User Info:", result.user);
+      localStorage.setItem("user", JSON.stringify(result.user));
       navigate("/dashboard"); // ✅ Redirect to dashboard
     } catch (error: any) {
       if (error.code === "auth/popup-closed-by-user") {

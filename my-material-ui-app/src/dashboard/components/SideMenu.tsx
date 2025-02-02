@@ -79,7 +79,7 @@ export default function SideMenu() {
             sx={{ fontWeight: 500, lineHeight: "16px" }}
           >
             {/* BAR Riley Carter */}
-            {user.name}
+            {user.name || user.displayName}
           </Typography>
           <Typography variant="caption" sx={{ color: "text.secondary" }}>
             {/* riley@email.com */}
