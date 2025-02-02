@@ -96,5 +96,16 @@ module.exports = (pool) => {
     }
   );
 
+    // Get all users
+    router.get('/users', async (req, res) => {
+      try {
+        const result = await pool.query('SELECT id, name, email FROM users');
+        res.status(200).json(result.rows);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    });
+
   return router;
 };
